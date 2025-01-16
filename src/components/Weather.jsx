@@ -1,10 +1,9 @@
-import {api_key, base_url, weather_cash_time} from "../utils/constants.js";
+import {api_key, base_url} from "../utils/constants.js";
 import {useEffect, useState} from "react";
 
 const Weather = ({city}) => {
     const [weather, setWeather] = useState({});
     const [message, setMessage] = useState('Enter city name');
-    const [timeStamp, setTimeStamp] = useState(0);
 
     const getWeather = async () => {
         try {
@@ -20,7 +19,6 @@ const Weather = ({city}) => {
                 pressure: data.main.pressure,
                 sunset: data.sys.sunset * 1000
             })
-            setTimeStamp(Date.now());
             setMessage('');
         } catch (e) {
             setMessage(e.message);
@@ -31,13 +29,6 @@ const Weather = ({city}) => {
         if (city) {
             getWeather();
         }
-    }, [city]);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            //TODO
-        }, weather_cash_time)
-        return () => clearInterval(interval);
     }, [city]);
 
     return (
