@@ -5,6 +5,7 @@ const Form = ({setCity}) => {
         e.preventDefault();
         const city = e.target.city.value.trim();
         setCity(city);
+        e.target.city.value = '';
 
     }
     return (
